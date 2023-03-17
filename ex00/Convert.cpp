@@ -6,7 +6,7 @@
 /*   By: mmidon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 09:26:03 by mmidon            #+#    #+#             */
-/*   Updated: 2023/03/14 17:05:04 by mmidon           ###   ########.fr       */
+/*   Updated: 2023/03/17 10:46:27 by mmidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -68,9 +68,9 @@ int isInt(std::string const &litteral)
 int isFloat(std::string const &litteral)
 {
 	size_t i = 0;
-	std::string pseudoLitteral[] = {"-inff", "+inff", "nanf"};
+	std::string pseudoLitteral[] = {"-inff", "+inff", "nanf", "inff"};
 
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 4; i++)
 		if (litteral == pseudoLitteral[i])
 			return (1);
 	
@@ -102,10 +102,10 @@ int isFloat(std::string const &litteral)
 int isDouble(const std::string &litteral)
 {
 	size_t i = 0;
-	std::string pseudoLitteral[] = {"-inf", "+inf", "nan"};
+	std::string pseudoLitteral[] = {"-inf", "+inf", "nan","inf"};
 	int count = 0;
 
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 4; i++)
 		if (litteral == pseudoLitteral[i])
 			return (1);
 
@@ -130,8 +130,14 @@ int isDouble(const std::string &litteral)
 	
 }
 
+double ft_abs(double value)
+{
+	return (value < 0 ? -value : value);
+}
+
 void ScalarConverter::convert(const std::string &litteral)
 {
+	const std::string pseudoLitteral[] = {"-inf", "+inf", "nan", "inf"};
 	if (litteral.empty())
 		throw ScalarConverter::UnknownTypeException();
 	if (isChar(litteral)) //char
@@ -143,83 +149,72 @@ void ScalarConverter::convert(const std::string &litteral)
 	}
 	else if (isInt(litteral)) //int
 	{
-		double trueInt;
+		int trueValue;
 		try
 		{
-			trueInt = stoi(litteral);
-			if (isascii(trueInt))
-				std::cout << "char : " << static_cast<char> (trueInt) << std::endl;
+			trueValue = stoi(litteral);
+			if (isprint(trueValue))
+				std::cout << "char : " << static_cast<char> (trueValue) << std::endl;
 			else
 				std::cout << "char : impossible" << std::endl;
-			std::cout << "int : " << trueInt << std::endl;
+			std::cout << "int : " << trueValue << std::endl;
 		}
 		catch(std::exception)
 		{
 			std::cout << "char : impossible" << std::endl;
 			std::cout << "int : impossible" << std::endl;
 		}
-		try
-		{
-			trueInt = stof(litteral);
-			std::cout << std::fixed << std::setprecision(1) << "float : " << trueInt << "f" << std::endl;
-		}
-		catch(std::exception)
-		{
-			std::cout << "float : impossible" << std::endl;
-		}
-		try
-		{
-			trueInt = stod(litteral);
-			std::cout << std::fixed << std::setprecision(1) << "double : " << trueInt << std::endl;
-		}
-		catch(std::exception)
-		{
-			std::cout << "double : impossible" << std::endl;
-		}
-		
+		std::cout << std::fixed << std::setprecision(1) << "float : " << static_cast<float> (trueValue) << "f" << std::endl;
+		std::cout << std::fixed << std::setprecision(1) << "double : " << static_cast<double> (trueValue) << std::endl;
 	}
-	else if (isFloat(litteral))
+	else if (isFloat(litteral)) ///float
 	{
-		double trueInt;
+		float trueValue;
 		try
 		{
-			trueInt = static_cast<int>(stof(litteral));
-			std::cout << trueInt << " aled" <<std::endl; 
-			if (isascii(trueInt) && trueInt != 0)
-				std::cout << "char : " << static_cast<char> (trueInt) << std::endl;
+			trueValue = stof(litteral);
+			if (isprint(trueValue) && trueValue != 0)
+				std::cout << "char : " << static_cast<char> (trueValue) << std::endl;
 			else
 				std::cout << "char : impossible" << std::endl;
-			std::cout << "int : " << static_cast<int>(trueInt) << std::endl;
+			if (trueValue <= INT_MAX && trueValue >= INT_MIN)
+				std::cout << "int : " << static_cast<int>(trueValue) << std::endl;
+			else
+				std::cout << "int : impossible" << std::endl;
+			std::cout << "float : " << trueValue << "f" << std::endl;
+			std::cout << "double : " << static_cast<double> (trueValue) << std::endl;
 		}
-		catch(std::exception)
+		catch(std::exception &e)
 		{
-			std::cout << "char : impossible" << std::endl;
-			std::cout << "int : impossible" << std::endl;
-		}
-		try
-		{
-			trueInt = stof(litteral);
-			std::cout << std::fixed << std::setprecision(1) << "float : " << trueInt << "f" << std::endl;
-		}
-		catch(std::exception)
-		{
-			std::cout << "float : impossible" << std::endl;
-		}
-		try
-		{
-			trueInt = stod(litteral);
-			std::cout << std::fixed << std::setprecision(1) << "double : " << trueInt << std::endl;
-		}
-		catch(std::exception)
-		{
-			std::cout << "double : impossible" << std::endl;
+			std::cout << "Exception caught : " << e.what() << std::endl;
 		}
 	}
-	else if (isDouble(litteral))
+	else if (isDouble(litteral)) //////double
 	{
-		std::cout << "double" << std::endl;
+		double trueValue;
+		try
+		{
+			trueValue = stod(litteral);
+			if (isprint(trueValue) && trueValue != 0)
+				std::cout << "char : " << static_cast<char> (trueValue) << std::endl;
+			else
+				std::cout << "char : impossible" << std::endl;
+			if (trueValue <= INT_MAX && trueValue >= INT_MIN)
+				std::cout << "int : " << static_cast<int>(trueValue) << std::endl;
+			else
+				std::cout << "int : impossible" << std::endl;
+			if (ft_abs(trueValue) < 3.4028235677973366e+38 || litteral == pseudoLitteral[0] || litteral == pseudoLitteral[1] || litteral == pseudoLitteral[2] || litteral == pseudoLitteral[3])
+				std::cout << "float : " << static_cast<float> (trueValue) << "f" << std::endl;
+			else
+				std::cout << "float : impossible" << std::endl;
+			std::cout << "double : " << trueValue << std::endl;
+		}
+		catch(std::exception &e)
+		{
+			std::cout << "Exception caught : " << e.what() << std::endl;
+		}
 	}
-	else
+	else //none
 	{
 		throw ScalarConverter::UnknownTypeException();
 	}
