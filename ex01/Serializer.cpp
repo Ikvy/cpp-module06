@@ -6,7 +6,7 @@
 /*   By: mmidon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:42:50 by mmidon            #+#    #+#             */
-/*   Updated: 2023/03/17 17:02:29 by mmidon           ###   ########.fr       */
+/*   Updated: 2023/03/18 17:02:52 by mmidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ Serializer& Serializer::operator=(const Serializer& a)
 
 uintptr_t Serializer::serialize(Data *ptr)
 {
-	return (reinterpret_cast<uintptr_t>(*ptr));
+	return (reinterpret_cast<uintptr_t>(ptr));
 }
 
 Data* Serializer::deserialize(uintptr_t raw)
