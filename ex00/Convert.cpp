@@ -6,7 +6,7 @@
 /*   By: mmidon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 09:26:03 by mmidon            #+#    #+#             */
-/*   Updated: 2023/03/20 14:22:35 by mmidon           ###   ########.fr       */
+/*   Updated: 2023/03/20 14:26:15 by mmidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -43,7 +43,7 @@ int isChar(std::string const &litteral)
 {
 	if (litteral.length() == 1)
 	{
-		if (isprint(litteral[0]))
+		if (isprint(litteral[0]) && !isdigit(litteral[0]))
 			return (1);
 	}
 	return (0);
