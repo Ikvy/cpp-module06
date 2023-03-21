@@ -6,7 +6,7 @@
 /*   By: mmidon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 09:25:12 by mmidon            #+#    #+#             */
-/*   Updated: 2023/03/14 14:38:42 by mmidon           ###   ########.fr       */
+/*   Updated: 2023/03/21 09:39:37 by mmidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 
 class ScalarConverter
 {
-	public:
+	private:
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter& cpy);
+	public:
 		~ScalarConverter();
 		ScalarConverter& operator=(const ScalarConverter& a);
 		static void convert(const std::string &litteral);

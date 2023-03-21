@@ -6,12 +6,11 @@
 /*   By: mmidon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:37:48 by mmidon            #+#    #+#             */
-/*   Updated: 2023/03/20 14:28:53 by mmidon           ###   ########.fr       */
+/*   Updated: 2023/03/21 09:49:49 by mmidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include <iostream>
 
 typedef struct Data
 {

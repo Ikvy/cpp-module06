@@ -6,7 +6,7 @@
 /*   By: mmidon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 09:26:03 by mmidon            #+#    #+#             */
-/*   Updated: 2023/03/20 14:26:15 by mmidon           ###   ########.fr       */
+/*   Updated: 2023/03/21 09:43:37 by mmidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -149,7 +149,7 @@ void ScalarConverter::convert(const std::string &litteral)
 	}
 	else if (isInt(litteral)) //int
 	{
-		int trueValue;
+		double trueValue;
 		try
 		{
 			trueValue = stoi(litteral);
@@ -159,7 +159,7 @@ void ScalarConverter::convert(const std::string &litteral)
 				std::cout << "char : impossible" << std::endl;
 			std::cout << "int : " << trueValue << std::endl;
 		}
-		catch(std::exception)
+		catch(std::exception &e)
 		{
 			std::cout << "char : impossible" << std::endl;
 			std::cout << "int : impossible" << std::endl;
